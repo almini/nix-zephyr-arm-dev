@@ -20,9 +20,13 @@
       url = "github:zephyrproject-rtos/zephyr?ref=zephyr-v3.2.0";
       flake = false;
     };
+    manifest = {
+      url = "./example/west.yml";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, mach-nix, zephyr-sdk-arm, zephyr, ... }: {
+  outputs = { self, nixpkgs, flake-utils, mach-nix, zephyr-sdk-arm, zephyr, manifest, ... }: {
     overlay = final: prev: {
 
       zephyr-sdk-arm = zephyr-sdk-arm.packages.${prev.system}.default;
@@ -70,7 +74,7 @@
 
       devShells.default = 
         let
-          zephyrManifestInfo = pkgs.lib.lists.findFirst (x: x.name == "zephyr") null (pkgs.lib.readYAML ./west.yml).manifest.projects;
+          zephyrManifestInfo = pkgs.lib.lists.findFirst (x: x.name == "zephyr") null (pkgs.lib.readYAML "${manifest}").manifest.projects;
           zephyrManifestRev = if isNull zephyrManifestInfo then null else zephyrManifestInfo.revision;
 
           # Read requirements files to get Python dependencies
@@ -90,7 +94,7 @@
           };
         in 
         assert pkgs.lib.asserts.assertMsg (zephyr.rev == zephyrManifestRev) "Zephyr revisions from west manifest and flake must match";
-        pkgs.mkShell {
+        pkgs.mkShell (builtins.trace zephyrManifestInfo {
           buildInputs = with pkgs; [
             cmake
             ninja
@@ -103,7 +107,7 @@
             export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
             export ZEPHYR_SDK_INSTALL_DIR=${pkgs.zephyr-sdk-arm}
           '';
-        };
+        });
 
     });
 }
