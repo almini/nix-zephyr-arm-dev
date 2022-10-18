@@ -94,7 +94,7 @@
           };
         in 
         assert pkgs.lib.asserts.assertMsg (zephyr.rev == zephyrManifestRev) "Zephyr revisions from west manifest and flake must match";
-        pkgs.mkShell (builtins.trace zephyrManifestInfo {
+        pkgs.mkShell {
           buildInputs = with pkgs; [
             cmake
             ninja
@@ -107,7 +107,7 @@
             export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
             export ZEPHYR_SDK_INSTALL_DIR=${pkgs.zephyr-sdk-arm}
           '';
-        });
+        };
 
     });
 }

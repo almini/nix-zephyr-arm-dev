@@ -1,7 +1,7 @@
 {
   inputs = {
     zephyr = {
-      url = "github:zephyrproject-rtos/zephyr?ref=d2ffa8a3ebf085b0bc6a255aad5dd490c9e03ca5";
+      url = "github:zephyrproject-rtos/zephyr?ref=4256cd41df6c60f1832fd2deb14edc30ac7debab";
       flake = false;
     };
     manifest = {

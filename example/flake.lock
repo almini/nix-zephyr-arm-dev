@@ -87,6 +87,19 @@
         "type": "indirect"
       }
     },
+    "manifest": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1,
+        "narHash": "sha256-efQEx7aOtC1dlCS3kAtie3ovRSV2OeLXsTvQepZcYEs=",
+        "path": "/nix/store/frl5kvrismwyd6kapnjv7m3zcrx9v0yl-source/west.yml",
+        "type": "path"
+      },
+      "original": {
+        "path": "/nix/store/frl5kvrismwyd6kapnjv7m3zcrx9v0yl-source/west.yml",
+        "type": "path"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1643805626,
@@ -218,6 +231,7 @@
     },
     "root": {
       "inputs": {
+        "manifest": "manifest",
         "zephyr": "zephyr",
         "zephyr-arm-dev": "zephyr-arm-dev"
       }
@@ -225,16 +239,16 @@
     "zephyr": {
       "flake": false,
       "locked": {
-        "lastModified": 1666095265,
-        "narHash": "sha256-2+RRTpRrAY2mMLLCDzDbtwiwIwJpeJ7wCfSg336dNys=",
+        "lastModified": 1664561182,
+        "narHash": "sha256-pNZgMd2zSVFCAoCG7LEV+o2wUYGr38b/EutszjEdDAc=",
         "owner": "zephyrproject-rtos",
         "repo": "zephyr",
-        "rev": "d2ffa8a3ebf085b0bc6a255aad5dd490c9e03ca5",
+        "rev": "4256cd41df6c60f1832fd2deb14edc30ac7debab",
         "type": "github"
       },
       "original": {
         "owner": "zephyrproject-rtos",
-        "ref": "d2ffa8a3ebf085b0bc6a255aad5dd490c9e03ca5",
+        "ref": "4256cd41df6c60f1832fd2deb14edc30ac7debab",
         "repo": "zephyr",
         "type": "github"
       }
@@ -243,6 +257,9 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "mach-nix": "mach-nix",
+        "manifest": [
+          "manifest"
+        ],
         "nixpkgs": "nixpkgs_2",
         "pypi-deps-db": "pypi-deps-db",
         "zephyr": [
@@ -251,11 +268,11 @@
         "zephyr-sdk-arm": "zephyr-sdk-arm"
       },
       "locked": {
-        "lastModified": 1666104453,
-        "narHash": "sha256-D6q6DcE/t2JxKeOsuYIAoEwXIH0vFbH6bvWfafVO0vk=",
+        "lastModified": 1666107050,
+        "narHash": "sha256-QsnX/X7f/eFQev5AcOwy8zEicvCJ4vRcRtvV5igxnH0=",
         "owner": "almini",
         "repo": "nix-zephyr-arm-dev",
-        "rev": "78ab35f361242b1fca1dc6c83270b6694d5737e2",
+        "rev": "6538239992106839eaddf1743d96138ea177c88b",
         "type": "github"
       },
       "original": {
