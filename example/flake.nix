@@ -18,7 +18,7 @@
   outputs = { self, zephyr-arm-dev, ... }: let 
     flake-utils = zephyr-arm-dev.inputs.flake-utils;
   in flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system: 
-    builtins.trace zephyr-arm-dev {
+    {
       devShells.default = zephyr-arm-dev.devShells.${system}.default;
     });
 }

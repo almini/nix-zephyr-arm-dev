@@ -92,11 +92,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-efQEx7aOtC1dlCS3kAtie3ovRSV2OeLXsTvQepZcYEs=",
-        "path": "/nix/store/frl5kvrismwyd6kapnjv7m3zcrx9v0yl-source/west.yml",
+        "path": "/nix/store/5yzqb6wax3hbrqqxmjjm8zdwwb04jp7k-source/west.yml",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/frl5kvrismwyd6kapnjv7m3zcrx9v0yl-source/west.yml",
+        "path": "/nix/store/5yzqb6wax3hbrqqxmjjm8zdwwb04jp7k-source/west.yml",
         "type": "path"
       }
     },
@@ -268,11 +268,11 @@
         "zephyr-sdk-arm": "zephyr-sdk-arm"
       },
       "locked": {
-        "lastModified": 1666107050,
-        "narHash": "sha256-QsnX/X7f/eFQev5AcOwy8zEicvCJ4vRcRtvV5igxnH0=",
+        "lastModified": 1666107386,
+        "narHash": "sha256-ix+0balbMzz2o2xdtyOosBQXrJ0AXfOFPYKc2TdjgBE=",
         "owner": "almini",
         "repo": "nix-zephyr-arm-dev",
-        "rev": "6538239992106839eaddf1743d96138ea177c88b",
+        "rev": "c96701fadf301b343a6691e1a89b2942d1c6a096",
         "type": "github"
       },
       "original": {
