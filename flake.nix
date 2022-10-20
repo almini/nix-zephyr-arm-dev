@@ -106,6 +106,7 @@
           shellHook = ''
             export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
             export ZEPHYR_SDK_INSTALL_DIR=${pkgs.zephyr-sdk-arm}
+            export ZEPHYR_BASE=''$(west topdir)/''$(west config zephyr.base)
           '';
         };
 
