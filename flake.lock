@@ -86,19 +86,6 @@
         "type": "indirect"
       }
     },
-    "manifest": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-efQEx7aOtC1dlCS3kAtie3ovRSV2OeLXsTvQepZcYEs=",
-        "path": "/nix/store/hrwj9n8x7hjsawyh9z3hnw6skz2zra20-source/example/west.yml",
-        "type": "path"
-      },
-      "original": {
-        "path": "/nix/store/hrwj9n8x7hjsawyh9z3hnw6skz2zra20-source/example/west.yml",
-        "type": "path"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1643805626,
@@ -232,7 +219,6 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "mach-nix": "mach-nix",
-        "manifest": "manifest",
         "nixpkgs": "nixpkgs_2",
         "pypi-deps-db": "pypi-deps-db",
         "zephyr": "zephyr",

@@ -22,44 +22,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, mach-nix, zephyr-sdk-arm, zephyr, ... }: {
-    overlay = final: prev: {
-
-      zephyr-sdk-arm = zephyr-sdk-arm.packages.${prev.system}.default;
-
-      lib =
-        let
-          fromYAML = yaml: builtins.fromJSON (
-            builtins.readFile (
-              final.runCommand "from-yaml"
-                {
-                  inherit yaml;
-                  allowSubstitutes = false;
-                  preferLocalBuild = true;
-                }
-                ''
-                  ${final.remarshal}/bin/remarshal  \
-                    -if yaml \
-                    -i <(echo "$yaml") \
-                    -of json \
-                    -o $out
-                ''
-            )
-          );
-
-          readYAML = path: fromYAML (builtins.readFile path);
-        in
-        prev.lib // {
-          inherit fromYAML readYAML;
-        };
-
-    };
-  } // flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
+  outputs = { nixpkgs, flake-utils, mach-nix, zephyr-sdk-arm, zephyr, ... }: flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
     let
+      overlay = final: prev: {
+        zephyr-sdk-arm = zephyr-sdk-arm.packages.${prev.system}.default;
+      };
+
       pkgs = import nixpkgs {
         inherit system;
         overlays = [
-          self.overlay
+          overlay
         ];
       };
     in
