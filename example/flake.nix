@@ -4,14 +4,9 @@
       url = "github:zephyrproject-rtos/zephyr?ref=4256cd41df6c60f1832fd2deb14edc30ac7debab";
       flake = false;
     };
-    manifest = {
-      url = "./west.yml";
-      flake = false;
-    };
     zephyr-arm-dev = {
       url = "github:almini/nix-zephyr-arm-dev";
       inputs.zephyr.follows = "zephyr";
-      inputs.manifest.follows = "manifest";
     };
   };
 

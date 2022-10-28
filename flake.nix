@@ -20,13 +20,9 @@
       url = "github:zephyrproject-rtos/zephyr?ref=zephyr-v3.2.0";
       flake = false;
     };
-    manifest = {
-      url = "./example/west.yml";
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, mach-nix, zephyr-sdk-arm, zephyr, manifest, ... }: {
+  outputs = { self, nixpkgs, flake-utils, mach-nix, zephyr-sdk-arm, zephyr, ... }: {
     overlay = final: prev: {
 
       zephyr-sdk-arm = zephyr-sdk-arm.packages.${prev.system}.default;
@@ -75,9 +71,6 @@
 
       devShells.default =
         let
-          zephyrManifestInfo = pkgs.lib.lists.findFirst (x: x.name == "zephyr") null (pkgs.lib.readYAML "${manifest}").manifest.projects;
-          zephyrManifestRev = if (zephyrManifestInfo == null) then null else zephyrManifestInfo.revision;
-
           # Read requirements files to get Python dependencies
           # mach-nix is not capable of using a requirements.txt with -r directives
           # Using list of requirements files: read each file, concatenate contents in single string
@@ -94,7 +87,6 @@
             requirements = pythonRequirements;
           };
         in
-        assert pkgs.lib.asserts.assertMsg (zephyr.rev == zephyrManifestRev) "Zephyr revisions from west manifest and flake must match";
         pkgs.mkShell {
           buildInputs = with pkgs; [
             cmake
