@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    
+
     pypi-deps-db = {
       url = "github:DavHau/pypi-deps-db";
     };
@@ -31,8 +31,8 @@
 
       zephyr-sdk-arm = zephyr-sdk-arm.packages.${prev.system}.default;
 
-      lib = 
-        let 
+      lib =
+        let
           fromYAML = yaml: builtins.fromJSON (
             builtins.readFile (
               final.runCommand "from-yaml"
@@ -52,18 +52,19 @@
           );
 
           readYAML = path: fromYAML (builtins.readFile path);
-        in prev.lib // {
+        in
+        prev.lib // {
           inherit fromYAML readYAML;
         };
 
     };
   } // flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
     let
-      pkgs = import nixpkgs { 
-        inherit system; 
-        overlays = [ 
-          self.overlay 
-        ]; 
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          self.overlay
+        ];
       };
     in
     {
@@ -72,27 +73,27 @@
           zephyr-sdk-arm;
       };
 
-      devShells.default = 
+      devShells.default =
         let
           zephyrManifestInfo = pkgs.lib.lists.findFirst (x: x.name == "zephyr") null (pkgs.lib.readYAML "${manifest}").manifest.projects;
-          zephyrManifestRev = if isNull zephyrManifestInfo then null else zephyrManifestInfo.revision;
+          zephyrManifestRev = if (zephyrManifestInfo == null) then null else zephyrManifestInfo.revision;
 
           # Read requirements files to get Python dependencies
           # mach-nix is not capable of using a requirements.txt with -r directives
           # Using list of requirements files: read each file, concatenate contents in single string
-          pythonRequirementsFiles = [ 
-            "${zephyr}/scripts/requirements-base.txt" 
-            "${zephyr}/scripts/requirements-build-test.txt" 
-            "${zephyr}/scripts/requirements-compliance.txt" 
-            "${zephyr}/scripts/requirements-doc.txt" 
+          pythonRequirementsFiles = [
+            "${zephyr}/scripts/requirements-base.txt"
+            "${zephyr}/scripts/requirements-build-test.txt"
+            "${zephyr}/scripts/requirements-compliance.txt"
+            "${zephyr}/scripts/requirements-doc.txt"
             "${zephyr}/scripts/requirements-extras.txt"
             "${zephyr}/scripts/requirements-run-test.txt"
           ];
-          pythonRequirements = pkgs.lib.concatStrings (map (x: builtins.readFile x) pythonRequirementsFiles);
-          pythonEnv = mach-nix.lib.${system}.mkPython { 
+          pythonRequirements = pkgs.lib.concatStrings (map builtins.readFile pythonRequirementsFiles);
+          pythonEnv = mach-nix.lib.${system}.mkPython {
             requirements = pythonRequirements;
           };
-        in 
+        in
         assert pkgs.lib.asserts.assertMsg (zephyr.rev == zephyrManifestRev) "Zephyr revisions from west manifest and flake must match";
         pkgs.mkShell {
           buildInputs = with pkgs; [

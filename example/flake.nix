@@ -15,10 +15,12 @@
     };
   };
 
-  outputs = { self, zephyr-arm-dev, ... }: let 
-    flake-utils = zephyr-arm-dev.inputs.flake-utils;
-  in flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system: 
-    {
-      devShells.default = zephyr-arm-dev.devShells.${system}.default;
-    });
+  outputs = { self, zephyr-arm-dev, ... }:
+    let
+      inherit (zephyr-arm-dev.inputs) flake-utils;
+    in
+    flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
+      {
+        devShells.default = zephyr-arm-dev.devShells.${system}.default;
+      });
 }
