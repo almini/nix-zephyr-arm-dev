@@ -16,6 +16,17 @@
     in
     flake-utils.lib.eachSystem [ "x86_64-linux" "aarch64-linux" ] (system:
       {
-        devShells.default = zephyr-arm-dev.devShells.${system}.default;
+        devShells.default = zephyr-arm-dev.devShells.${system}.default.overrideAttrs (finalAttrs: previousAttrs: {
+
+          buildInputs = previousAttrs.buildInputs ++ [
+            # pkgs.stlink
+            # pkgs.segger-jlink
+          ];
+
+          shellHook = previousAttrs.shellHook + ''
+            # export ZEPHYR_BASE=''$(west topdir)/zephyr
+          '';
+        });
+        
       });
 }
