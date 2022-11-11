@@ -65,7 +65,6 @@
           buildInputs = with pkgs; [
             cmake
             ninja
-            stlink
             pkgs.zephyr-sdk-arm
             python39Packages.west # west from pythonEnv has issues with jlink runner
             pythonEnv
