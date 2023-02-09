@@ -9,7 +9,7 @@
       url = "github:DavHau/pypi-deps-db";
     };
     mach-nix = {
-      url = "mach-nix/3.5.0";
+      url = "mach-nix";
       inputs.pypi-deps-db.follows = "pypi-deps-db";
     };
     zephyr-sdk-arm = {
@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zephyr = {
-      url = "github:zephyrproject-rtos/zephyr?ref=zephyr-v3.2.0";
+      url = "github:zephyrproject-rtos/zephyr?ref=main";
       flake = false;
     };
   };
